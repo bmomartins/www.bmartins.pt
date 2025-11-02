@@ -86,3 +86,10 @@ footer {
         height: 2.5rem; /* Slightly smaller badges on mobile */
     }
 }
+
+.ai-note {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 1rem;
+    font-style: italic;
+}
