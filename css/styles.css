@@ -90,7 +90,11 @@ footer {
 .ai-note {
     font-size: 0.8rem;
     color: #666;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+.ai-note:first-of-type {
     font-style: italic;
 }
 
