@@ -48,7 +48,14 @@ h2 {
     flex-wrap: wrap;
     gap: 0.5rem; /* Reduce from 1rem for tighter spacing on mobile */
     justify-content: center;
+    align-items: center;
     margin-top: 2rem;
+}
+
+.social-links img {
+    width: 120px;
+    height: 32px;
+    object-fit: cover;
 }
 
 a {
