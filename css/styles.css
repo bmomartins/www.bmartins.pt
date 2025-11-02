@@ -52,12 +52,6 @@ h2 {
     margin-top: 2rem;
 }
 
-.social-links img {
-    width: 120px;
-    height: 32px;
-    object-fit: cover;
-}
-
 a {
     transition: opacity 0.3s ease;
 }
