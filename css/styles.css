@@ -59,3 +59,20 @@ a {
 a:hover {
     opacity: 0.8;
 }
+
+footer {
+    margin-top: auto;
+    padding: 2rem;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
+.fsf-badge {
+    margin-top: 2rem;
+}
+
+.fsf-badge img {
+    max-width: 100%;
+    height: auto;
+}
