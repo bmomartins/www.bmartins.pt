@@ -1,44 +1,61 @@
 body {
-    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+header {
+    margin-top: 2rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 800px;
+}
+
+header p {
+    margin: 0.5rem 0;
+    line-height: 1.5;
+}
+
+header p em {
+    color: #808080;
+    font-size: 0.9rem;
+}
+
+main {
+    padding: 2rem;
+    width: 100%;
+    max-width: 800px;
 }
 
 h1 {
-    text-align: center;
-    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
 }
 
-p {
-    text-align: center;
-    color: #666;
-}
-
-a {
-    text-decoration: none;
-}
-
-a img {
-    margin: 10px;
-    transition: transform 0.2s;
-}
-
-a img:hover {
-    transform: scale(1.1);
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+h2 {
+    color: #4a9eff;
+    margin-bottom: 2rem;
 }
 
 .social-links {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+a {
+    transition: opacity 0.3s ease;
+}
+
+a:hover {
+    opacity: 0.8;
 }
