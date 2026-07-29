@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home | Bruno Martins' Corner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
@@ -13,54 +14,73 @@
         })(window, document, "clarity", "script", "tzzls5opx7");
     </script>
 </head>
-<body>
+<body class="bg-zinc-950 text-zinc-100 min-h-screen flex flex-col">
     <div id="header-container"></div>
-    <main>
+    <main class="flex-1 max-w-3xl mx-auto w-full px-6 py-10">
         <section>
-            <h2>You can find me here:</h2>
-            <div class="social-links">
+            <h2 class="text-xl font-semibold text-blue-400 mb-8 text-center">Find me here</h2>
+
+            <div class="space-y-8">
                 <!-- Social Media -->
-                <a href="https://twitter.com/thyskorzen" target="_blank">
-                    <img src="https://img.shields.io/badge/-X-000000?style=for-the-badge&logo=x&logoColor=white" alt="X"/>
-                </a>
-                <a href="https://instagram.com/thyskorzen" target="_blank">
-                    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/>
-                </a>
-                <a href="https://www.reddit.com/user/bmomartins/" target="_blank">
-                    <img src="https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=white" alt="Reddit"/>
-                </a>
-                <a href="https://bsky.app/profile/bmartins.pt" target="_blank">
-                    <img src="https://img.shields.io/badge/Bluesky-0085FF?style=for-the-badge&logo=bluesky&logoColor=white" alt="Bluesky"/>
-                </a>
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">Social</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://twitter.com/thyskorzen" target="_blank" class="hover:opacity-75 transition-opacity">
+                            <img src="https://img.shields.io/badge/-X-000000?style=for-the-badge&logo=x&logoColor=white" alt="X"/>
+                        </a>
+                        <a href="https://instagram.com/thyskorzen" target="_blank" class="hover:opacity-75 transition-opacity">
+                            <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram"/>
+                        </a>
+                        <a href="https://www.reddit.com/user/bmomartins/" target="_blank" class="hover:opacity-75 transition-opacity">
+                            <img src="https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=white" alt="Reddit"/>
+                        </a>
+                        <a href="https://bsky.app/profile/bmartins.pt" target="_blank" class="hover:opacity-75 transition-opacity">
+                            <img src="https://img.shields.io/badge/Bluesky-0085FF?style=for-the-badge&logo=bluesky&logoColor=white" alt="Bluesky"/>
+                        </a>
+                    </div>
+                </div>
 
                 <!-- Professional -->
-                <a href="https://github.com/bmomartins" target="_blank">
-                    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
-                </a>
-                <a href="https://linkedin.com/in/bmomartins" target="_blank">
-                    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
-                </a>
-                <a href="https://www.credly.com/users/bmomartins" target="_blank">
-                    <img src="https://img.shields.io/badge/Credly-FF6B00?style=for-the-badge&logo=credly&logoColor=white" alt="Credly"/>
-                </a>
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">Professional</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://github.com/bmomartins" target="_blank" class="hover:opacity-75 transition-opacity">
+                            <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
+                        </a>
+                        <a href="https://linkedin.com/in/bmomartins" target="_blank" class="hover:opacity-75 transition-opacity">
+                            <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+                        </a>
+                        <a href="https://www.credly.com/users/bmomartins" target="_blank" class="hover:opacity-75 transition-opacity">
+                            <img src="https://img.shields.io/badge/Credly-FF6B00?style=for-the-badge&logo=credly&logoColor=white" alt="Credly"/>
+                        </a>
+                    </div>
+                </div>
 
                 <!-- Gaming -->
-                <a href="https://steamcommunity.com/id/bmomartins/" target="_blank">
-                    <img src="https://img.shields.io/badge/Steam-000000?style=for-the-badge&logo=steam&logoColor=white" alt="Steam"/>
-                </a>
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">Gaming</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://steamcommunity.com/id/bmomartins/" target="_blank" class="hover:opacity-75 transition-opacity">
+                            <img src="https://img.shields.io/badge/Steam-000000?style=for-the-badge&logo=steam&logoColor=white" alt="Steam"/>
+                        </a>
+                    </div>
+                </div>
 
-                <!-- Content -->
-                <a href="https://blog.bmartins.pt" target="_blank">
-                    <img src="https://img.shields.io/badge/Blog-FF5722?style=for-the-badge&logo=blogger&logoColor=white" alt="Blog"/>
-                </a>
-
-                <!-- Contact -->
-                <a href="xmpp:skorzen@member.fsf.org" target="_blank">
-                    <img src="https://img.shields.io/badge/XMPP-002B5C?style=for-the-badge&logo=xmpp&logoColor=white" alt="XMPP"/>
-                </a>
-                <a href="mailto:bruno@bmartins.pt" target="_blank">
-                    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/>
-                </a>
+                <!-- Content & Contact -->
+                <div>
+                    <h3 class="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-3">Content & Contact</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://blog.bmartins.pt" target="_blank" class="hover:opacity-75 transition-opacity">
+                            <img src="https://img.shields.io/badge/Blog-FF5722?style=for-the-badge&logo=blogger&logoColor=white" alt="Blog"/>
+                        </a>
+                        <a href="xmpp:skorzen@member.fsf.org" target="_blank" class="hover:opacity-75 transition-opacity">
+                            <img src="https://img.shields.io/badge/XMPP-002B5C?style=for-the-badge&logo=xmpp&logoColor=white" alt="XMPP"/>
+                        </a>
+                        <a href="mailto:bruno@bmartins.pt" target="_blank" class="hover:opacity-75 transition-opacity">
+                            <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
