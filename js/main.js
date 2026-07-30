@@ -42,10 +42,31 @@ document.addEventListener('DOMContentLoaded', async function () {
     // Contact form — AJAX submission to Netlify function
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
+        const submitBtn = document.getElementById('submit-btn');
+        const formError = document.getElementById('form-error');
+        const turnstileWidgetContainer = document.getElementById('turnstile-widget');
+        let turnstileWidgetId = null;
+
+        try {
+            const configResponse = await fetch('/.netlify/functions/contact-config');
+            const configData = await configResponse.json();
+
+            if (!configResponse.ok || !configData.turnstileSiteKey) {
+                throw new Error(configData.error || 'Contact form configuration is unavailable.');
+            }
+
+            await waitForTurnstileApi();
+            turnstileWidgetId = window.turnstile.render(turnstileWidgetContainer, {
+                sitekey: configData.turnstileSiteKey,
+            });
+        } catch (err) {
+            formError.textContent = 'Contact form is temporarily unavailable. Please try again later.';
+            formError.classList.remove('hidden');
+            submitBtn.disabled = true;
+        }
+
         contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
-            const submitBtn = document.getElementById('submit-btn');
-            const formError = document.getElementById('form-error');
 
             // Client-side validation
             const name = contactForm.querySelector('[name="name"]').value.trim();
@@ -92,10 +113,20 @@ document.addEventListener('DOMContentLoaded', async function () {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Send Message';
                 // Reset Turnstile widget so the user can retry
-                if (window.turnstile) {
-                    window.turnstile.reset();
+                if (window.turnstile && turnstileWidgetId !== null) {
+                    window.turnstile.reset(turnstileWidgetId);
                 }
             }
         });
     }
 });
+
+async function waitForTurnstileApi(maxWaitMs = 5000) {
+    const start = Date.now();
+    while (!window.turnstile || typeof window.turnstile.render !== 'function') {
+        if (Date.now() - start > maxWaitMs) {
+            throw new Error('Turnstile API failed to load');
+        }
+        await new Promise(function (resolve) { setTimeout(resolve, 100); });
+    }
+}
