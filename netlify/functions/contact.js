@@ -1,10 +1,10 @@
 // Handles contact form submissions.
 // Required env vars:
-//   RESEND_API_KEY       — Resend API key
+//   RESEND_API_KEY      — Resend API key
 //   TURNSTILE_SECRET_KEY — Cloudflare Turnstile secret key
 // Optional env vars:
-//   RESEND_FROM          — From address (default: contact-form@bmartins.pt)
-//   NOTIFICATION_EMAIL   — To address (default: bruno@bmartins.pt)
+//   CONTACT_FROM_EMAIL  — From address (default: contact-form@bmartins.pt)
+//   CONTACT_TO_EMAIL    — To address (default: bruno@bmartins.pt)
 exports.handler = async function (event) {
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: 'Method Not Allowed' };
@@ -51,8 +51,8 @@ exports.handler = async function (event) {
         return { statusCode: 500, body: JSON.stringify({ error: 'Server configuration error' }) };
     }
 
-    const from = process.env.RESEND_FROM || 'contact-form@bmartins.pt';
-    const to = process.env.NOTIFICATION_EMAIL || 'bruno@bmartins.pt';
+    const from = process.env.CONTACT_FROM_EMAIL || 'contact-form@bmartins.pt';
+    const to = process.env.CONTACT_TO_EMAIL || 'bruno@bmartins.pt';
 
     const html = `
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
