@@ -52,7 +52,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             formError.classList.add('hidden');
 
             try {
-                const response = await fetch('/', {
+                const submissionUrl = contactForm.getAttribute('action') || window.location.pathname || '/contact.html';
+                const response = await fetch(submissionUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: new URLSearchParams(new FormData(contactForm)).toString(),
