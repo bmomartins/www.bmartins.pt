@@ -4,6 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Bruno Martins' Corner</title>
+    <script>
+        if (localStorage.getItem('theme') === 'dark' ||
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { darkMode: 'class' }</script>
     <link rel="stylesheet" href="css/styles.css">
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
@@ -13,60 +21,60 @@
         })(window, document, "clarity", "script", "tzzls5opx7");
     </script>
 </head>
-<body>
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 min-h-screen flex flex-col">
     <div id="header-container"></div>
-    <main>
-        <article class="about-content">
-            <p>Hi! I'm Bruno Martins, born in 1989. I'm passionate about technology, metal music, and creative solutions.</p>
-            
-            <h2>Professional Journey</h2>
-            <p>My IT career began in 2008, and I've grown through various roles and technologies:</p>
-            
-            <h3>Early Career</h3>
-            <ul>
-                <li>Started in helpdesk supporting Windows environments</li>
-                <li>Managed training rooms with virtualization solutions (Microsoft, VMware, Oracle)</li>
-                <li>Administered core services (Active Directory, Exchange, ISA Server)</li>
-            </ul>
+    <main class="flex-1 max-w-3xl mx-auto w-full px-6 py-10">
+        <article>
+            <p class="text-zinc-600 dark:text-zinc-300 text-lg mb-10 leading-relaxed">Hi! I'm Bruno Martins, born in 1989. I'm passionate about technology, metal music, and creative solutions.</p>
 
-            <h3>Infrastructure Management</h3>
-            <ul>
-                <li>Supported enterprise IT infrastructure</li>
-                <li>Managed data center operations for company and customer systems</li>
-                <li>Handled pre-cloud era infrastructure solutions</li>
-            </ul>
+            <h2 class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-4">Professional Journey</h2>
+            <p class="text-zinc-500 dark:text-zinc-400 mb-6">My IT career began in 2008, and I've grown through various roles and technologies:</p>
 
-            <h3>IT Consultancy</h3>
-            <ul>
-                <li>Delivered Microsoft technology projects</li>
-                <li>Specialized in:
-                    <ul>
-                        <li>Active Directory</li>
-                        <li>Exchange</li>
-                        <li>Configuration Manager</li>
-                        <li>Microsoft 365</li>
-                        <li>Azure</li>
+            <div class="space-y-4 mb-10">
+                <div class="bg-zinc-50 dark:bg-zinc-900 rounded-lg p-6 border border-zinc-200 dark:border-zinc-800">
+                    <h3 class="text-zinc-900 dark:text-white font-semibold mb-3">Early Career</h3>
+                    <ul class="space-y-2 text-zinc-600 dark:text-zinc-400">
+                        <li class="flex gap-2"><span class="text-blue-500 dark:text-blue-400 flex-shrink-0">▸</span>Started in helpdesk supporting Windows environments</li>
+                        <li class="flex gap-2"><span class="text-blue-500 dark:text-blue-400 flex-shrink-0">▸</span>Managed training rooms with virtualization solutions (Microsoft, VMware, Oracle)</li>
+                        <li class="flex gap-2"><span class="text-blue-500 dark:text-blue-400 flex-shrink-0">▸</span>Administered core services (Active Directory, Exchange, ISA Server)</li>
                     </ul>
-                </li>
-            </ul>
+                </div>
 
-            <h3>Current Role</h3>
-            <p>Currently working as a system administrator at EUDA.</p>
+                <div class="bg-zinc-50 dark:bg-zinc-900 rounded-lg p-6 border border-zinc-200 dark:border-zinc-800">
+                    <h3 class="text-zinc-900 dark:text-white font-semibold mb-3">Infrastructure Management</h3>
+                    <ul class="space-y-2 text-zinc-600 dark:text-zinc-400">
+                        <li class="flex gap-2"><span class="text-blue-500 dark:text-blue-400 flex-shrink-0">▸</span>Supported enterprise IT infrastructure</li>
+                        <li class="flex gap-2"><span class="text-blue-500 dark:text-blue-400 flex-shrink-0">▸</span>Managed data center operations for company and customer systems</li>
+                        <li class="flex gap-2"><span class="text-blue-500 dark:text-blue-400 flex-shrink-0">▸</span>Handled pre-cloud era infrastructure solutions</li>
+                    </ul>
+                </div>
 
-            <h2>Personal Interests</h2>
-            <p>When I'm not working, you can find me:</p>
-            <ul>
-                <li>🎸 Enjoying metal music</li>
-                <li>🎮 Gaming</li>
-                <li>📚 Learning new technologies</li>
-            </ul>
+                <div class="bg-zinc-50 dark:bg-zinc-900 rounded-lg p-6 border border-zinc-200 dark:border-zinc-800">
+                    <h3 class="text-zinc-900 dark:text-white font-semibold mb-3">IT Consultancy</h3>
+                    <ul class="space-y-2 text-zinc-600 dark:text-zinc-400">
+                        <li class="flex gap-2"><span class="text-blue-500 dark:text-blue-400 flex-shrink-0">▸</span>Delivered Microsoft technology projects</li>
+                        <li class="flex gap-2"><span class="text-blue-500 dark:text-blue-400 flex-shrink-0">▸</span>Specialized in: Active Directory, Exchange, Configuration Manager, Microsoft 365, Azure</li>
+                    </ul>
+                </div>
 
-            <h2>Values</h2>
-            <p>I'm a strong advocate for:</p>
-            <ul>
-                <li>Continuous learning</li>
-                <li>Knowledge sharing</li>
-            </ul>
+                <div class="bg-zinc-50 dark:bg-zinc-900 rounded-lg p-6 border border-l-4 border-zinc-200 dark:border-zinc-800 border-l-blue-500">
+                    <h3 class="text-zinc-900 dark:text-white font-semibold mb-2">Current Role</h3>
+                    <p class="text-zinc-600 dark:text-zinc-400">System Administrator at <span class="text-zinc-900 dark:text-zinc-200 font-medium">EUDA</span></p>
+                </div>
+            </div>
+
+            <h2 class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-4">Personal Interests</h2>
+            <div class="flex flex-wrap gap-3 mb-10">
+                <span class="bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-full px-4 py-2 text-zinc-700 dark:text-zinc-300 text-sm">🎸 Metal Music</span>
+                <span class="bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-full px-4 py-2 text-zinc-700 dark:text-zinc-300 text-sm">🎮 Gaming</span>
+                <span class="bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-full px-4 py-2 text-zinc-700 dark:text-zinc-300 text-sm">📚 Learning Technologies</span>
+            </div>
+
+            <h2 class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-4">Values</h2>
+            <div class="flex flex-wrap gap-3">
+                <span class="bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-full px-4 py-2 text-zinc-700 dark:text-zinc-300 text-sm">Continuous Learning</span>
+                <span class="bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-full px-4 py-2 text-zinc-700 dark:text-zinc-300 text-sm">Knowledge Sharing</span>
+            </div>
         </article>
     </main>
     <div id="footer-container"></div>
