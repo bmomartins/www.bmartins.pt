@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
     }
 
-    // Contact form — AJAX submission to Netlify
+    // Contact form — AJAX submission to Netlify function
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
         contactForm.addEventListener('submit', async function (e) {
@@ -47,28 +47,54 @@ document.addEventListener('DOMContentLoaded', async function () {
             const submitBtn = document.getElementById('submit-btn');
             const formError = document.getElementById('form-error');
 
+            // Client-side validation
+            const name = contactForm.querySelector('[name="name"]').value.trim();
+            const email = contactForm.querySelector('[name="email"]').value.trim();
+            const subject = contactForm.querySelector('[name="subject"]').value.trim();
+            const message = contactForm.querySelector('[name="message"]').value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!name || !email || !subject || !message) {
+                formError.textContent = 'Please fill in all fields.';
+                formError.classList.remove('hidden');
+                return;
+            }
+            if (!emailPattern.test(email)) {
+                formError.textContent = 'Please enter a valid email address.';
+                formError.classList.remove('hidden');
+                return;
+            }
+
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending…';
             formError.classList.add('hidden');
 
             try {
-                const submissionUrl = contactForm.getAttribute('action') || window.location.pathname || '/contact.html';
-                const response = await fetch(submissionUrl, {
+                const response = await fetch('/.netlify/functions/contact', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: new URLSearchParams(new FormData(contactForm)).toString(),
                 });
 
-                if (response.ok) {
+                const data = await response.json();
+
+                if (response.ok && data.success) {
                     document.getElementById('form-container').classList.add('hidden');
                     document.getElementById('success-container').classList.remove('hidden');
                 } else {
-                    throw new Error('Server returned ' + response.status);
+                    throw new Error(data.error || 'Unexpected error');
                 }
             } catch (err) {
+                formError.textContent = err.message && err.message !== 'Failed to fetch'
+                    ? err.message
+                    : 'Something went wrong. Please try again or email me directly.';
                 formError.classList.remove('hidden');
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Send Message';
+                // Reset Turnstile widget so the user can retry
+                if (window.turnstile) {
+                    window.turnstile.reset();
+                }
             }
         });
     }
