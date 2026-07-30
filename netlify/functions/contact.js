@@ -28,21 +28,24 @@ exports.handler = async function (event) {
 
     // Verify Turnstile CAPTCHA
     const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
-    if (turnstileSecret) {
-        const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams({
-                secret: turnstileSecret,
-                response: turnstileToken,
-                remoteip: event.headers['x-forwarded-for'] || '',
-            }).toString(),
-        });
-        const verifyData = await verifyRes.json();
-        if (!verifyData.success) {
-            console.warn('Turnstile verification failed:', verifyData['error-codes']);
-            return { statusCode: 400, body: JSON.stringify({ error: 'CAPTCHA verification failed. Please try again.' }) };
-        }
+    if (!turnstileSecret) {
+        console.error('TURNSTILE_SECRET_KEY is not configured');
+        return { statusCode: 500, body: JSON.stringify({ error: 'Server configuration error' }) };
+    }
+
+    const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+            secret: turnstileSecret,
+            response: turnstileToken,
+            remoteip: event.headers['x-forwarded-for'] || '',
+        }).toString(),
+    });
+    const verifyData = await verifyRes.json();
+    if (!verifyData.success) {
+        console.warn('Turnstile verification failed:', verifyData['error-codes']);
+        return { statusCode: 400, body: JSON.stringify({ error: 'CAPTCHA verification failed. Please try again.' }) };
     }
 
     const apiKey = process.env.RESEND_API_KEY;
