@@ -45,6 +45,40 @@ document.addEventListener('DOMContentLoaded', async function () {
         const submitBtn = document.getElementById('submit-btn');
         const formError = document.getElementById('form-error');
 
+        // Turnstile setup: render widget once both the script and site key are ready
+        let turnstileSiteKey = null;
+        let turnstileReady = false;
+        let turnstileWidgetId = null;
+
+        function renderTurnstileWidget() {
+            if (turnstileReady && turnstileSiteKey && turnstileWidgetId === null) {
+                turnstileWidgetId = window.turnstile.render('#turnstile-container', {
+                    sitekey: turnstileSiteKey,
+                    callback: function () { submitBtn.disabled = false; },
+                    'expired-callback': function () { submitBtn.disabled = true; },
+                    'error-callback': function () { submitBtn.disabled = true; },
+                });
+            }
+        }
+
+        window.onTurnstileLoad = function () {
+            turnstileReady = true;
+            renderTurnstileWidget();
+        };
+
+        fetch('/.netlify/functions/contact-config')
+            .then(function (r) { return r.json(); })
+            .then(function (data) {
+                if (data.turnstileSiteKey) {
+                    turnstileSiteKey = data.turnstileSiteKey;
+                    renderTurnstileWidget();
+                }
+            })
+            .catch(function () {
+                formError.textContent = 'Could not load CAPTCHA. Please refresh the page.';
+                formError.classList.remove('hidden');
+            });
+
         contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
 
@@ -90,8 +124,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                     ? err.message
                     : 'Something went wrong. Please try again or email me directly.';
                 formError.classList.remove('hidden');
-                submitBtn.disabled = false;
                 submitBtn.textContent = 'Send Message';
+                // Reset Turnstile so user can get a fresh token
+                if (window.turnstile && turnstileWidgetId !== null) {
+                    window.turnstile.reset(turnstileWidgetId);
+                    submitBtn.disabled = true;
+                }
             }
         });
     }
