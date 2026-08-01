@@ -94,6 +94,7 @@
             // Contact — errors
             'contact.error.required': 'Please fill in all fields.',
             'contact.error.email': 'Please enter a valid email address.',
+            'contact.error.captcha': 'Please complete the captcha challenge.',
             'contact.error.generic': 'Something went wrong. Please try again or email me directly.',
         },
 
@@ -191,6 +192,7 @@
             // Contact — errors
             'contact.error.required': 'Por favor preenche todos os campos.',
             'contact.error.email': 'Por favor introduz um endereço de email válido.',
+            'contact.error.captcha': 'Por favor completa o desafio captcha.',
             'contact.error.generic': 'Algo correu mal. Por favor tenta novamente ou envia-me um email diretamente.',
         },
     };

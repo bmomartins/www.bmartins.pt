@@ -15,6 +15,7 @@
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' }</script>
+    <script src="https://js.hcaptcha.com/1/api.js?render=explicit" async defer></script>
     <link rel="stylesheet" href="css/styles.css">
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
@@ -69,6 +70,7 @@
 
                     <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
                     <input type="hidden" name="form_started_at" id="form-started-at">
+                    <div id="hcaptcha-widget" class="h-captcha"></div>
 
                     <div class="flex items-center justify-between gap-4">
                         <p id="form-error" class="text-red-500 dark:text-red-400 text-sm hidden"></p>
