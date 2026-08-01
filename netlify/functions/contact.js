@@ -1,23 +1,28 @@
 // Handles contact form submissions.
 // Required env vars:
 //   RESEND_API_KEY      — Resend API key
-//   TURNSTILE_SECRET_KEY — Cloudflare Turnstile secret key
 // Optional env vars:
 //   CONTACT_FROM_EMAIL  — From address (default: contact-form@bmartins.pt)
 //   CONTACT_TO_EMAIL    — To address (default: bruno@bmartins.pt)
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 5;
+const MIN_HUMAN_SUBMIT_MS = 3000;
+const ipSubmissions = new Map();
+
 exports.handler = async function (event) {
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: 'Method Not Allowed' };
     }
 
-    let name, email, subject, message, turnstileToken;
+    let name, email, subject, message, website, formStartedAt;
     try {
         const params = new URLSearchParams(event.body);
         name = (params.get('name') || '').trim();
         email = (params.get('email') || '').trim();
         subject = (params.get('subject') || '').trim();
         message = (params.get('message') || '').trim();
-        turnstileToken = params.get('cf-turnstile-response') || '';
+        website = (params.get('website') || '').trim();
+        formStartedAt = (params.get('form_started_at') || '').trim();
     } catch (err) {
         return { statusCode: 400, body: JSON.stringify({ error: 'Invalid request body' }) };
     }
@@ -26,34 +31,43 @@ exports.handler = async function (event) {
         return { statusCode: 400, body: JSON.stringify({ error: 'All fields are required' }) };
     }
 
-    // Verify Turnstile CAPTCHA
-    const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
-    if (turnstileSecret) {
-        const headers = event.headers || {};
+    if (name.length > 120 || email.length > 254 || subject.length > 200 || message.length > 5000) {
+        return { statusCode: 400, body: JSON.stringify({ error: 'Invalid field lengths' }) };
+    }
 
-        if (!turnstileToken) {
-            return { statusCode: 400, body: JSON.stringify({ error: 'CAPTCHA verification failed. Please try again.' }) };
-        }
+    if (website) {
+        return { statusCode: 400, body: JSON.stringify({ error: 'Submission blocked' }) };
+    }
 
-        const forwardedFor = headers['x-forwarded-for'] || headers['X-Forwarded-For'] || '';
-        const remoteIp = String(forwardedFor).split(',')[0].trim();
-        const verifyParams = new URLSearchParams({
-            secret: turnstileSecret,
-            response: turnstileToken,
-        });
-        if (remoteIp) {
-            verifyParams.set('remoteip', remoteIp);
-        }
+    const startedAt = Number(formStartedAt);
+    if (!Number.isFinite(startedAt) || startedAt <= 0 || Date.now() - startedAt < MIN_HUMAN_SUBMIT_MS) {
+        return { statusCode: 400, body: JSON.stringify({ error: 'Submission blocked' }) };
+    }
 
-        const verifyRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: verifyParams.toString(),
-        });
-        const verifyData = await verifyRes.json();
-        if (!verifyData.success) {
-            console.warn('Turnstile verification failed:', verifyData['error-codes']);
-            return { statusCode: 400, body: JSON.stringify({ error: 'CAPTCHA verification failed. Please try again.' }) };
+    const headers = event.headers || {};
+    const forwardedFor = headers['x-forwarded-for'] || headers['X-Forwarded-For'] || '';
+    const remoteIp = String(forwardedFor).split(',')[0].trim() || 'unknown';
+    const now = Date.now();
+    const existing = ipSubmissions.get(remoteIp) || [];
+    const recent = existing.filter(function (ts) { return now - ts < RATE_LIMIT_WINDOW_MS; });
+    recent.push(now);
+    ipSubmissions.set(remoteIp, recent);
+    if (recent.length > RATE_LIMIT_MAX_REQUESTS) {
+        return {
+            statusCode: 429,
+            headers: { 'Retry-After': String(Math.ceil(RATE_LIMIT_WINDOW_MS / 1000)) },
+            body: JSON.stringify({ error: 'Too many requests. Please try again later.' }),
+        };
+    }
+
+    if (ipSubmissions.size > 10000) {
+        for (const [ip, timestamps] of ipSubmissions.entries()) {
+            const valid = timestamps.filter(function (ts) { return now - ts < RATE_LIMIT_WINDOW_MS; });
+            if (valid.length === 0) {
+                ipSubmissions.delete(ip);
+            } else {
+                ipSubmissions.set(ip, valid);
+            }
         }
     }
 

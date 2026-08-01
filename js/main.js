@@ -9,14 +9,6 @@
     }
 }());
 
-window.contactFormTurnstileReady = Boolean(window.turnstile && typeof window.turnstile.render === 'function');
-window.onTurnstileLoad = function () {
-    window.contactFormTurnstileReady = true;
-    if (typeof window.renderContactTurnstile === 'function') {
-        window.renderContactTurnstile();
-    }
-};
-
 document.addEventListener('DOMContentLoaded', async function () {
     // Load header
     const headerResponse = await fetch('/components/header.html');
@@ -64,38 +56,20 @@ document.addEventListener('DOMContentLoaded', async function () {
         const formContainer = document.getElementById('form-container');
         const successContainer = document.getElementById('success-container');
         const sendAnotherBtn = document.getElementById('send-another-btn');
+        const formStartedAt = document.getElementById('form-started-at');
 
-        // Turnstile setup: render widget once both the script and site key are ready
-        let turnstileSiteKey = null;
-        let turnstileReady = window.contactFormTurnstileReady;
-        let turnstileWidgetId = null;
-
-        function renderTurnstileWidget() {
-            if (turnstileReady && turnstileSiteKey && turnstileWidgetId === null) {
-                turnstileWidgetId = window.turnstile.render('#turnstile-container', {
-                    sitekey: turnstileSiteKey,
-                    callback: function () { submitBtn.disabled = false; },
-                    'expired-callback': function () { submitBtn.disabled = true; },
-                    'error-callback': function () { submitBtn.disabled = true; },
-                });
+        function stampFormStart() {
+            if (formStartedAt) {
+                formStartedAt.value = String(Date.now());
             }
         }
 
         function resetContactFormState() {
             contactForm.reset();
+            stampFormStart();
             formError.classList.add('hidden');
             submitBtn.textContent = window.i18n ? window.i18n.t('contact.submit') : 'Send Message';
-            if (window.turnstile && turnstileWidgetId !== null) {
-                window.turnstile.reset(turnstileWidgetId);
-                submitBtn.disabled = true;
-            } else {
-                submitBtn.disabled = false;
-            }
-        }
-
-        window.renderContactTurnstile = function () {
-            turnstileReady = true;
-            renderTurnstileWidget();
+            submitBtn.disabled = false;
         };
 
         if (sendAnotherBtn) {
@@ -105,24 +79,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                 resetContactFormState();
             });
         }
-
-        fetch('/.netlify/functions/contact-config')
-            .then(function (r) { return r.json(); })
-            .then(function (data) {
-                if (data.turnstileSiteKey) {
-                    turnstileSiteKey = data.turnstileSiteKey;
-                    renderTurnstileWidget();
-                } else {
-                    submitBtn.disabled = false;
-                }
-            })
-            .catch(function () {
-                submitBtn.disabled = false;
-            });
-
-        if (turnstileReady) {
-            window.renderContactTurnstile();
-        }
+        stampFormStart();
 
         contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -150,14 +107,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             formError.classList.add('hidden');
 
             try {
-                if (turnstileSiteKey && turnstileWidgetId === null) {
-                    throw new Error(window.i18n ? window.i18n.t('contact.error.captcha') : 'CAPTCHA is not ready yet. Please wait a moment and try again.');
-                }
-
                 const formParams = new URLSearchParams(new FormData(contactForm));
-                if (window.turnstile && turnstileWidgetId !== null) {
-                    formParams.set('cf-turnstile-response', window.turnstile.getResponse(turnstileWidgetId) || '');
-                }
 
                 const response = await fetch('/.netlify/functions/contact', {
                     method: 'POST',
@@ -180,11 +130,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     : (window.i18n ? window.i18n.t('contact.error.generic') : 'Something went wrong. Please try again or email me directly.');
                 formError.classList.remove('hidden');
                 submitBtn.textContent = window.i18n ? window.i18n.t('contact.submit') : 'Send Message';
-                // Reset Turnstile so user can get a fresh token
-                if (window.turnstile && turnstileWidgetId !== null) {
-                    window.turnstile.reset(turnstileWidgetId);
-                    submitBtn.disabled = true;
-                }
+                submitBtn.disabled = false;
             }
         });
     }

@@ -94,7 +94,6 @@
             // Contact — errors
             'contact.error.required': 'Please fill in all fields.',
             'contact.error.email': 'Please enter a valid email address.',
-            'contact.error.captcha': 'CAPTCHA is not ready yet. Please wait a moment and try again.',
             'contact.error.generic': 'Something went wrong. Please try again or email me directly.',
         },
 
@@ -192,7 +191,6 @@
             // Contact — errors
             'contact.error.required': 'Por favor preenche todos os campos.',
             'contact.error.email': 'Por favor introduz um endereço de email válido.',
-            'contact.error.captcha': 'O CAPTCHA ainda não está pronto. Por favor aguarda um momento e tenta novamente.',
             'contact.error.generic': 'Algo correu mal. Por favor tenta novamente ou envia-me um email diretamente.',
         },
     };
