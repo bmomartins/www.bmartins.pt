@@ -35,7 +35,7 @@
     <div id="header-container"></div>
     <main class="flex-1 max-w-3xl mx-auto w-full px-6 py-10">
         <article>
-            <p data-i18n="about.intro" class="text-zinc-600 dark:text-zinc-300 text-lg mb-10 leading-relaxed">Hi! I'm Bruno Martins, born in 1989 in Portugal. I work across enterprise infrastructure, cloud, identity, and messaging, with a strong focus on Microsoft 365, Active Directory, Entra ID, SCIM, SAML, Exchange, and Nutanix. FSF member since 2012 and strong advocate for open-source software and digital freedom.</p>
+            <p data-i18n="about.intro" class="text-zinc-600 dark:text-zinc-300 text-lg mb-10 leading-relaxed">Hi! I'm Bruno Martins, born in 1989 in Portugal. I work across enterprise infrastructure, cloud, identity, and messaging, with a strong focus on Microsoft 365, Active Directory, Entra ID, SCIM, SAML, Exchange, and Nutanix.</p>
 
             <!-- Career Timeline -->
             <h2 data-i18n="about.journey.title" class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-4">Professional Journey</h2>
@@ -92,6 +92,19 @@
                         <li class="flex gap-2"><span class="text-blue-500 dark:text-blue-400 flex-shrink-0">▸</span><span data-i18n="about.job4.bullet2">Managed training rooms with virtualization solutions (Hyper-V, VMware, VirtualBox)</span></li>
                         <li class="flex gap-2"><span class="text-blue-500 dark:text-blue-400 flex-shrink-0">▸</span><span data-i18n="about.job4.bullet3">Administered core services: Active Directory, Exchange, ISA Server</span></li>
                     </ul>
+                </div>
+            </div>
+
+            <!-- Companies Represented -->
+            <h2 data-i18n="about.companies.title" class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-4">Companies Represented</h2>
+            <div class="bg-zinc-50 dark:bg-zinc-900 rounded-lg p-6 border border-zinc-200 dark:border-zinc-800 mb-10">
+                <p data-i18n="about.companies.desc" class="text-zinc-500 dark:text-zinc-400 text-sm mb-4">Organizations I have represented throughout my career as employee or consultant:</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded px-3 py-1 text-sm">Galileu</span>
+                    <span class="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded px-3 py-1 text-sm">Rumos</span>
+                    <span class="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded px-3 py-1 text-sm">Claranet</span>
+                    <span class="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded px-3 py-1 text-sm">CGI</span>
+                    <span class="bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded px-3 py-1 text-sm">Inetum</span>
                 </div>
             </div>
 
@@ -158,16 +171,22 @@
 
             <!-- Community -->
             <h2 data-i18n="about.community.title" class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-4">Community & Open Source</h2>
-            <div class="bg-zinc-50 dark:bg-zinc-900 rounded-lg p-6 border border-zinc-200 dark:border-zinc-800 mb-10">
-                <div class="flex items-start gap-4">
-                    <div class="flex-1">
-                        <h3 class="text-zinc-900 dark:text-white font-semibold mb-1">Free Software Foundation</h3>
-                        <p data-i18n="about.community.fsf.meta" class="text-zinc-500 dark:text-zinc-400 text-sm mb-3">Associate member since January 2012 · Member #87958</p>
-                        <p data-i18n="about.community.fsf.desc" class="text-zinc-600 dark:text-zinc-400 text-sm">Believer in software freedom, open standards, and user-controlled computing.</p>
+            <div class="space-y-4 mb-10">
+                <div class="bg-zinc-50 dark:bg-zinc-900 rounded-lg p-6 border border-zinc-200 dark:border-zinc-800">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-1">
+                            <h3 class="text-zinc-900 dark:text-white font-semibold mb-1">Free Software Foundation</h3>
+                            <p data-i18n="about.community.fsf.meta" class="text-zinc-500 dark:text-zinc-400 text-sm mb-3">Associate member since January 2012 · Member #87958</p>
+                            <p data-i18n="about.community.fsf.desc" class="text-zinc-600 dark:text-zinc-400 text-sm">Believer in software freedom, open standards, and user-controlled computing.</p>
+                        </div>
+                        <a href="https://www.fsf.org/register_form?referrer=87958" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 hover:opacity-80 transition-opacity">
+                            <img src="https://static.fsf.org/nosvn/associate/crm/87958.png" alt="FSF Member Since January 2012" class="h-8">
+                        </a>
                     </div>
-                    <a href="https://www.fsf.org/register_form?referrer=87958" target="_blank" rel="noopener noreferrer" class="flex-shrink-0 hover:opacity-80 transition-opacity">
-                        <img src="https://static.fsf.org/nosvn/associate/crm/87958.png" alt="FSF Member Since January 2012" class="h-8">
-                    </a>
+                </div>
+                <div class="bg-zinc-50 dark:bg-zinc-900 rounded-lg p-6 border border-zinc-200 dark:border-zinc-800">
+                    <h3 class="text-zinc-900 dark:text-white font-semibold mb-1">osTicket</h3>
+                    <p data-i18n="about.community.osticket.desc" class="text-zinc-600 dark:text-zinc-400 text-sm">Contributed as a Portuguese translator for osTicket, the open-source support ticket system.</p>
                 </div>
             </div>
 
