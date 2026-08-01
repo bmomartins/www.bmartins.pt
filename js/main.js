@@ -76,22 +76,15 @@ document.addEventListener('DOMContentLoaded', async function () {
             if (window.hcaptcha && typeof window.hcaptcha.render === 'function') {
                 return;
             }
-
-            await new Promise(function (resolve, reject) {
-                const startedAt = Date.now();
-                const interval = setInterval(function () {
-                    if (window.hcaptcha && typeof window.hcaptcha.render === 'function') {
-                        clearInterval(interval);
-                        resolve();
-                        return;
-                    }
-
-                    if (Date.now() - startedAt >= timeoutMs) {
-                        clearInterval(interval);
-                        reject(new Error('hCaptcha script did not load'));
-                    }
-                }, 100);
-            });
+            if (!window._hcaptchaReady) {
+                throw new Error('hCaptcha script did not load');
+            }
+            await Promise.race([
+                window._hcaptchaReady,
+                new Promise(function (_, reject) {
+                    setTimeout(function () { reject(new Error('hCaptcha script did not load')); }, timeoutMs);
+                }),
+            ]);
         }
 
         async function setupHcaptcha() {
