@@ -47,6 +47,9 @@ document.addEventListener('DOMContentLoaded', async function () {
     if (contactForm) {
         const submitBtn = document.getElementById('submit-btn');
         const formError = document.getElementById('form-error');
+        const formContainer = document.getElementById('form-container');
+        const successContainer = document.getElementById('success-container');
+        const sendAnotherBtn = document.getElementById('send-another-btn');
 
         // Turnstile setup: render widget once both the script and site key are ready
         let turnstileSiteKey = null;
@@ -64,10 +67,30 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         }
 
+        function resetContactFormState() {
+            contactForm.reset();
+            formError.classList.add('hidden');
+            submitBtn.textContent = 'Send Message';
+            if (window.turnstile && turnstileWidgetId !== null) {
+                window.turnstile.reset(turnstileWidgetId);
+                submitBtn.disabled = true;
+            } else {
+                submitBtn.disabled = false;
+            }
+        }
+
         window.renderContactTurnstile = function () {
             turnstileReady = true;
             renderTurnstileWidget();
         };
+
+        if (sendAnotherBtn) {
+            sendAnotherBtn.addEventListener('click', function () {
+                successContainer.classList.add('hidden');
+                formContainer.classList.remove('hidden');
+                resetContactFormState();
+            });
+        }
 
         fetch('/.netlify/functions/contact-config')
             .then(function (r) { return r.json(); })
@@ -131,8 +154,9 @@ document.addEventListener('DOMContentLoaded', async function () {
                 const data = await response.json();
 
                 if (response.ok && data.success) {
-                    document.getElementById('form-container').classList.add('hidden');
-                    document.getElementById('success-container').classList.remove('hidden');
+                    formContainer.classList.add('hidden');
+                    successContainer.classList.remove('hidden');
+                    resetContactFormState();
                 } else {
                     throw new Error(data.error || 'Unexpected error');
                 }
