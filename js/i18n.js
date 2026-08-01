@@ -15,7 +15,7 @@
             'home.content': 'Content & Contact',
 
             // About — intro & journey
-            'about.intro': "Hi! I'm Bruno Martins, born in 1989 in Portugal. I work across enterprise infrastructure, cloud, identity, and messaging, with a strong focus on Microsoft 365, Active Directory, Entra ID, SCIM, SAML, Exchange, and Nutanix.",
+            'about.intro': "Hi! I'm Bruno Martins, born in 1989 in Portugal. I work across enterprise infrastructure, cloud, identity, and messaging, with a strong focus on Microsoft 365, Active Directory, Entra ID, SCIM, SAML, Exchange, and Nutanix. Outside of tech, I'm a former chess player with a love for economics and left-wing politics.",
             'about.journey.title': 'Professional Journey',
             'about.journey.subtitle': 'My IT career began in 2008, spanning 17+ years across helpdesk, infrastructure, consultancy, and system administration:',
 
@@ -77,6 +77,8 @@
             'about.interests.title': 'Personal Interests',
             'about.interests.metal': '🎸 Metal Music',
             'about.interests.gaming': '🎮 Gaming',
+            'about.interests.chess': '♟️ Chess',
+            'about.interests.economics': '📊 Economics',
             'about.interests.learning': '📚 Learning Technologies',
             'about.interests.oss': '🐧 Open Source',
             'about.values.title': 'Values',
@@ -84,6 +86,7 @@
             'about.values.sharing': 'Knowledge Sharing',
             'about.values.freedom': 'Software Freedom',
             'about.values.privacy': 'Privacy & Security',
+            'about.values.leftist': '✊ Left-wing',
 
             // Contact
             'contact.heading': 'Get in Touch',
@@ -124,7 +127,7 @@
             'home.content': 'Conteúdo e Contacto',
 
             // About — intro & journey
-            'about.intro': 'Olá! Sou Bruno Martins, nascido em 1989 em Portugal. Trabalho em infraestrutura empresarial, cloud, identidade e messaging, com foco especial em Microsoft 365, Active Directory, Entra ID, SCIM, SAML, Exchange e Nutanix.',
+            'about.intro': 'Olá! Sou Bruno Martins, nascido em 1989 em Portugal. Trabalho em infraestrutura empresarial, cloud, identidade e messaging, com foco especial em Microsoft 365, Active Directory, Entra ID, SCIM, SAML, Exchange e Nutanix. Fora do mundo tech, sou ex-jogador de xadrez com paixão por economia e política de esquerda.',
             'about.journey.title': 'Percurso Profissional',
             'about.journey.subtitle': 'A minha carreira em IT começou em 2008, abrangendo mais de 17 anos em helpdesk, infraestrutura, consultoria e administração de sistemas:',
 
@@ -186,6 +189,8 @@
             'about.interests.title': 'Interesses Pessoais',
             'about.interests.metal': '🎸 Música Metal',
             'about.interests.gaming': '🎮 Gaming',
+            'about.interests.chess': '♟️ Xadrez',
+            'about.interests.economics': '📊 Economia',
             'about.interests.learning': '📚 Aprendizagem de Tecnologias',
             'about.interests.oss': '🐧 Open Source',
             'about.values.title': 'Valores',
@@ -193,6 +198,7 @@
             'about.values.sharing': 'Partilha de Conhecimento',
             'about.values.freedom': 'Liberdade de Software',
             'about.values.privacy': 'Privacidade e Segurança',
+            'about.values.leftist': '✊ Esquerda',
 
             // Contact
             'contact.heading': 'Entre em Contacto',
