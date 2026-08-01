@@ -9,6 +9,9 @@
             (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
         }
+        if (localStorage.getItem('lang') === 'pt') {
+            document.documentElement.lang = 'pt';
+        }
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' }</script>
@@ -25,12 +28,12 @@
     <div id="header-container"></div>
     <main class="flex-1 max-w-3xl mx-auto w-full px-6 py-10">
         <section>
-            <h2 class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-8 text-center">Find me here</h2>
+            <h2 data-i18n="home.heading" class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-8 text-center">Find me here</h2>
 
             <div class="space-y-8">
                 <!-- Social -->
                 <div>
-                    <h3 class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-3">Social</h3>
+                    <h3 data-i18n="home.social" class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-3">Social</h3>
                     <div class="flex flex-wrap gap-3">
                         <a href="https://twitter.com/thyskorzen" target="_blank"
                            class="flex items-center justify-center w-11 h-11 rounded-xl bg-black hover:scale-110 hover:brightness-125 transition-all duration-150"
@@ -57,7 +60,7 @@
 
                 <!-- Professional -->
                 <div>
-                    <h3 class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-3">Professional</h3>
+                    <h3 data-i18n="home.professional" class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-3">Professional</h3>
                     <div class="flex flex-wrap gap-3">
                         <a href="https://github.com/bmomartins" target="_blank"
                            class="flex items-center justify-center w-11 h-11 rounded-xl bg-[#181717] hover:scale-110 hover:brightness-125 transition-all duration-150"
@@ -84,7 +87,7 @@
 
                 <!-- Gaming -->
                 <div>
-                    <h3 class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-3">Gaming</h3>
+                    <h3 data-i18n="home.gaming" class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-3">Gaming</h3>
                     <div class="flex flex-wrap gap-3">
                         <a href="https://steamcommunity.com/id/bmomartins/" target="_blank"
                            class="flex items-center justify-center w-11 h-11 rounded-xl bg-[#1b2838] hover:scale-110 hover:brightness-125 transition-all duration-150"
@@ -96,7 +99,7 @@
 
                 <!-- Content & Contact -->
                 <div>
-                    <h3 class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-3">Content & Contact</h3>
+                    <h3 data-i18n="home.content" class="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500 mb-3">Content & Contact</h3>
                     <div class="flex flex-wrap gap-3">
                         <a href="https://blog.bmartins.pt" target="_blank"
                            class="flex items-center justify-center w-11 h-11 rounded-xl bg-[#FF5722] hover:scale-110 hover:brightness-125 transition-all duration-150"
@@ -125,6 +128,7 @@
             </div>
         </section>
     </main>
+    <script src="js/i18n.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
