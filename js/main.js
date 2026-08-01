@@ -57,6 +57,8 @@ document.addEventListener('DOMContentLoaded', async function () {
         const successContainer = document.getElementById('success-container');
         const sendAnotherBtn = document.getElementById('send-another-btn');
         const formStartedAt = document.getElementById('form-started-at');
+        const hcaptchaWidget = document.getElementById('hcaptcha-widget');
+        let hcaptchaWidgetId = null;
 
         function stampFormStart() {
             if (formStartedAt) {
@@ -64,9 +66,59 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         }
 
+        function resetHcaptcha() {
+            if (window.hcaptcha && hcaptchaWidgetId !== null) {
+                window.hcaptcha.reset(hcaptchaWidgetId);
+            }
+        }
+
+        async function waitForHcaptcha(timeoutMs) {
+            if (window.hcaptcha && typeof window.hcaptcha.render === 'function') {
+                return;
+            }
+
+            await new Promise(function (resolve, reject) {
+                const startedAt = Date.now();
+                const interval = setInterval(function () {
+                    if (window.hcaptcha && typeof window.hcaptcha.render === 'function') {
+                        clearInterval(interval);
+                        resolve();
+                        return;
+                    }
+
+                    if (Date.now() - startedAt >= timeoutMs) {
+                        clearInterval(interval);
+                        reject(new Error('hCaptcha script did not load'));
+                    }
+                }, 100);
+            });
+        }
+
+        async function setupHcaptcha() {
+            if (!hcaptchaWidget) {
+                return;
+            }
+
+            const configResponse = await fetch('/.netlify/functions/contact-config');
+            if (!configResponse.ok) {
+                throw new Error('Failed to load contact form configuration');
+            }
+
+            const config = await configResponse.json();
+            if (!config.hcaptchaSiteKey) {
+                throw new Error('Captcha is not configured');
+            }
+
+            await waitForHcaptcha(5000);
+            hcaptchaWidgetId = window.hcaptcha.render('hcaptcha-widget', {
+                sitekey: config.hcaptchaSiteKey,
+            });
+        }
+
         function resetContactFormState() {
             contactForm.reset();
             stampFormStart();
+            resetHcaptcha();
             formError.classList.add('hidden');
             submitBtn.textContent = window.i18n ? window.i18n.t('contact.submit') : 'Send Message';
             submitBtn.disabled = false;
@@ -79,6 +131,15 @@ document.addEventListener('DOMContentLoaded', async function () {
                 resetContactFormState();
             });
         }
+
+        try {
+            await setupHcaptcha();
+        } catch (err) {
+            formError.textContent = window.i18n ? window.i18n.t('contact.error.generic') : 'Something went wrong. Please try again or email me directly.';
+            formError.classList.remove('hidden');
+            submitBtn.disabled = true;
+        }
+
         stampFormStart();
 
         contactForm.addEventListener('submit', async function (e) {
@@ -89,6 +150,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             const email = contactForm.querySelector('[name="email"]').value.trim();
             const subject = contactForm.querySelector('[name="subject"]').value.trim();
             const message = contactForm.querySelector('[name="message"]').value.trim();
+            const hcaptchaInput = contactForm.querySelector('[name="h-captcha-response"]');
+            const hcaptchaToken = hcaptchaInput ? hcaptchaInput.value.trim() : '';
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
             if (!name || !email || !subject || !message) {
@@ -98,6 +161,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
             if (!emailPattern.test(email)) {
                 formError.textContent = window.i18n ? window.i18n.t('contact.error.email') : 'Please enter a valid email address.';
+                formError.classList.remove('hidden');
+                return;
+            }
+            if (!hcaptchaToken) {
+                formError.textContent = window.i18n ? window.i18n.t('contact.error.captcha') : 'Please complete the captcha challenge.';
                 formError.classList.remove('hidden');
                 return;
             }
@@ -125,6 +193,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     throw new Error(data.error || 'Unexpected error');
                 }
             } catch (err) {
+                resetHcaptcha();
                 formError.textContent = err.message && err.message !== 'Failed to fetch'
                     ? err.message
                     : (window.i18n ? window.i18n.t('contact.error.generic') : 'Something went wrong. Please try again or email me directly.');

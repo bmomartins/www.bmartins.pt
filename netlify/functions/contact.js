@@ -1,6 +1,7 @@
 // Handles contact form submissions.
 // Required env vars:
 //   RESEND_API_KEY      — Resend API key
+//   HCAPTCHA_SECRET_KEY — hCaptcha secret key
 // Optional env vars:
 //   CONTACT_FROM_EMAIL  — From address (default: contact-form@bmartins.pt)
 //   CONTACT_TO_EMAIL    — To address (default: bruno@bmartins.pt)
@@ -14,7 +15,7 @@ exports.handler = async function (event) {
         return { statusCode: 405, body: 'Method Not Allowed' };
     }
 
-    let name, email, subject, message, website, formStartedAt;
+    let name, email, subject, message, website, formStartedAt, hcaptchaToken;
     try {
         const params = new URLSearchParams(event.body);
         name = (params.get('name') || '').trim();
@@ -23,6 +24,7 @@ exports.handler = async function (event) {
         message = (params.get('message') || '').trim();
         website = (params.get('website') || '').trim();
         formStartedAt = (params.get('form_started_at') || '').trim();
+        hcaptchaToken = (params.get('h-captcha-response') || '').trim();
     } catch (err) {
         return { statusCode: 400, body: JSON.stringify({ error: 'Invalid request body' }) };
     }
@@ -42,6 +44,10 @@ exports.handler = async function (event) {
     const startedAt = Number(formStartedAt);
     if (!Number.isFinite(startedAt) || startedAt <= 0 || Date.now() - startedAt < MIN_HUMAN_SUBMIT_MS) {
         return { statusCode: 400, body: JSON.stringify({ error: 'Submission blocked' }) };
+    }
+
+    if (!hcaptchaToken) {
+        return { statusCode: 400, body: JSON.stringify({ error: 'Please complete the captcha challenge.' }) };
     }
 
     const headers = event.headers || {};
@@ -75,6 +81,32 @@ exports.handler = async function (event) {
     if (!apiKey) {
         console.error('RESEND_API_KEY is not configured');
         return { statusCode: 500, body: JSON.stringify({ error: 'Server configuration error' }) };
+    }
+    const hcaptchaSecret = process.env.HCAPTCHA_SECRET_KEY;
+    if (!hcaptchaSecret) {
+        console.error('HCAPTCHA_SECRET_KEY is not configured');
+        return { statusCode: 500, body: JSON.stringify({ error: 'Server configuration error' }) };
+    }
+
+    const verifyPayload = new URLSearchParams({
+        secret: hcaptchaSecret,
+        response: hcaptchaToken,
+        remoteip: remoteIp,
+    });
+    const hcaptchaRes = await fetch('https://hcaptcha.com/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: verifyPayload.toString(),
+    });
+    if (!hcaptchaRes.ok) {
+        const hcaptchaBody = await hcaptchaRes.text();
+        console.error('hCaptcha verification API error:', hcaptchaRes.status, hcaptchaBody);
+        return { statusCode: 502, body: JSON.stringify({ error: 'Failed to verify captcha. Please try again.' }) };
+    }
+
+    const hcaptchaData = await hcaptchaRes.json();
+    if (!hcaptchaData.success) {
+        return { statusCode: 400, body: JSON.stringify({ error: 'Please complete the captcha challenge.' }) };
     }
 
     const from = process.env.CONTACT_FROM_EMAIL || 'contact-form@bmartins.pt';
