@@ -15,7 +15,7 @@
             'home.content': 'Content & Contact',
 
             // About — intro & journey
-            'about.intro': "Hi! I'm Bruno Martins, born in 1989 in Portugal. I work across enterprise infrastructure, cloud, identity, and messaging, with a strong focus on Microsoft 365, Active Directory, Entra ID, SCIM, SAML, Exchange, and Nutanix. FSF member since 2012 and strong advocate for open-source software and digital freedom.",
+            'about.intro': "Hi! I'm Bruno Martins, born in 1989 in Portugal. I work across enterprise infrastructure, cloud, identity, and messaging, with a strong focus on Microsoft 365, Active Directory, Entra ID, SCIM, SAML, Exchange, and Nutanix.",
             'about.journey.title': 'Professional Journey',
             'about.journey.subtitle': 'My IT career began in 2008, spanning 17+ years across helpdesk, infrastructure, consultancy, and system administration:',
 
@@ -67,6 +67,11 @@
             'about.community.title': 'Community & Open Source',
             'about.community.fsf.meta': 'Associate member since January 2012 · Member #87958',
             'about.community.fsf.desc': 'Believer in software freedom, open standards, and user-controlled computing.',
+            'about.community.osticket.desc': 'Contributed as a Portuguese translator for osTicket, the open-source support ticket system.',
+
+            // About — companies
+            'about.companies.title': 'Companies Represented',
+            'about.companies.desc': 'Organizations I have represented throughout my career as employee or consultant:',
 
             // About — interests & values
             'about.interests.title': 'Personal Interests',
@@ -119,7 +124,7 @@
             'home.content': 'Conteúdo e Contacto',
 
             // About — intro & journey
-            'about.intro': 'Olá! Sou Bruno Martins, nascido em 1989 em Portugal. Trabalho em infraestrutura empresarial, cloud, identidade e messaging, com foco especial em Microsoft 365, Active Directory, Entra ID, SCIM, SAML, Exchange e Nutanix. Membro da FSF desde 2012 e forte defensor do software open-source e da liberdade digital.',
+            'about.intro': 'Olá! Sou Bruno Martins, nascido em 1989 em Portugal. Trabalho em infraestrutura empresarial, cloud, identidade e messaging, com foco especial em Microsoft 365, Active Directory, Entra ID, SCIM, SAML, Exchange e Nutanix.',
             'about.journey.title': 'Percurso Profissional',
             'about.journey.subtitle': 'A minha carreira em IT começou em 2008, abrangendo mais de 17 anos em helpdesk, infraestrutura, consultoria e administração de sistemas:',
 
@@ -171,6 +176,11 @@
             'about.community.title': 'Comunidade e Open Source',
             'about.community.fsf.meta': 'Membro associado desde janeiro de 2012 · Membro nº 87958',
             'about.community.fsf.desc': 'Defensor da liberdade de software, padrões abertos e computação controlada pelo utilizador.',
+            'about.community.osticket.desc': 'Contribuiu como tradutor para português do osTicket, o sistema de tickets de suporte open-source.',
+
+            // About — companies
+            'about.companies.title': 'Empresas Representadas',
+            'about.companies.desc': 'Organizações que representei ao longo da minha carreira como colaborador ou consultor:',
 
             // About — interests & values
             'about.interests.title': 'Interesses Pessoais',
