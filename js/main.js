@@ -101,10 +101,19 @@ document.addEventListener('DOMContentLoaded', async function () {
             formError.classList.add('hidden');
 
             try {
+                if (turnstileSiteKey && turnstileWidgetId === null) {
+                    throw new Error('CAPTCHA is not ready yet. Please wait a moment and try again.');
+                }
+
+                const formParams = new URLSearchParams(new FormData(contactForm));
+                if (window.turnstile && turnstileWidgetId !== null) {
+                    formParams.set('cf-turnstile-response', window.turnstile.getResponse(turnstileWidgetId) || '');
+                }
+
                 const response = await fetch('/.netlify/functions/contact', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams(new FormData(contactForm)).toString(),
+                    body: formParams.toString(),
                 });
 
                 const data = await response.json();
