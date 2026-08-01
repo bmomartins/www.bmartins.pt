@@ -9,6 +9,14 @@
     }
 }());
 
+window.contactFormTurnstileReady = Boolean(window.turnstile && typeof window.turnstile.render === 'function');
+window.onTurnstileLoad = function () {
+    window.contactFormTurnstileReady = true;
+    if (typeof window.renderContactTurnstile === 'function') {
+        window.renderContactTurnstile();
+    }
+};
+
 document.addEventListener('DOMContentLoaded', async function () {
     // Load header
     const headerResponse = await fetch('/components/header.html');
@@ -45,7 +53,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         // Turnstile setup: render widget once both the script and site key are ready
         let turnstileSiteKey = null;
-        let turnstileReady = false;
+        let turnstileReady = window.contactFormTurnstileReady;
         let turnstileWidgetId = null;
 
         function renderTurnstileWidget() {
@@ -71,13 +79,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             }
         }
 
-        window.onTurnstileLoad = function () {
+        window.renderContactTurnstile = function () {
             turnstileReady = true;
             renderTurnstileWidget();
         };
-        if (window.turnstile && typeof window.turnstile.render === 'function') {
-            window.onTurnstileLoad();
-        }
 
         if (sendAnotherBtn) {
             sendAnotherBtn.addEventListener('click', function () {
@@ -100,6 +105,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             .catch(function () {
                 submitBtn.disabled = false;
             });
+
+        if (turnstileReady) {
+            window.renderContactTurnstile();
+        }
 
         contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
