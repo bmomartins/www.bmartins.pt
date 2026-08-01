@@ -15,7 +15,8 @@
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>tailwind.config = { darkMode: 'class' }</script>
-    <script src="https://js.hcaptcha.com/1/api.js?render=explicit" async defer></script>
+    <script>window._hcaptchaReady = new Promise(function (r) { window._hcaptchaOnLoad = r; });</script>
+    <script src="https://js.hcaptcha.com/1/api.js?render=explicit&onload=_hcaptchaOnLoad" async defer></script>
     <link rel="stylesheet" href="css/styles.css">
     <script type="text/javascript">
         (function(c,l,a,r,i,t,y){
