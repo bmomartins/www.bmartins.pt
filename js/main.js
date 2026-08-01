@@ -23,6 +23,11 @@ document.addEventListener('DOMContentLoaded', async function () {
     const headerContent = await headerResponse.text();
     document.getElementById('header-container').innerHTML = headerContent;
 
+    // Apply translations (header + page content)
+    if (window.i18n) {
+        window.i18n.apply();
+    }
+
     // Mark active nav link
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.main-nav-link').forEach(function (link) {
@@ -39,6 +44,15 @@ document.addEventListener('DOMContentLoaded', async function () {
         themeToggle.addEventListener('click', function () {
             const isDark = document.documentElement.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    }
+
+    // Language toggle
+    const langToggle = document.getElementById('lang-toggle');
+    if (langToggle && window.i18n) {
+        langToggle.addEventListener('click', function () {
+            const newLang = window.i18n.getLang() === 'en' ? 'pt' : 'en';
+            window.i18n.setLang(newLang);
         });
     }
 
@@ -70,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         function resetContactFormState() {
             contactForm.reset();
             formError.classList.add('hidden');
-            submitBtn.textContent = 'Send Message';
+            submitBtn.textContent = window.i18n ? window.i18n.t('contact.submit') : 'Send Message';
             if (window.turnstile && turnstileWidgetId !== null) {
                 window.turnstile.reset(turnstileWidgetId);
                 submitBtn.disabled = true;
@@ -121,23 +135,23 @@ document.addEventListener('DOMContentLoaded', async function () {
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
             if (!name || !email || !subject || !message) {
-                formError.textContent = 'Please fill in all fields.';
+                formError.textContent = window.i18n ? window.i18n.t('contact.error.required') : 'Please fill in all fields.';
                 formError.classList.remove('hidden');
                 return;
             }
             if (!emailPattern.test(email)) {
-                formError.textContent = 'Please enter a valid email address.';
+                formError.textContent = window.i18n ? window.i18n.t('contact.error.email') : 'Please enter a valid email address.';
                 formError.classList.remove('hidden');
                 return;
             }
 
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending…';
+            submitBtn.textContent = window.i18n ? window.i18n.t('contact.submitting') : 'Sending\u2026';
             formError.classList.add('hidden');
 
             try {
                 if (turnstileSiteKey && turnstileWidgetId === null) {
-                    throw new Error('CAPTCHA is not ready yet. Please wait a moment and try again.');
+                    throw new Error(window.i18n ? window.i18n.t('contact.error.captcha') : 'CAPTCHA is not ready yet. Please wait a moment and try again.');
                 }
 
                 const formParams = new URLSearchParams(new FormData(contactForm));
@@ -163,9 +177,9 @@ document.addEventListener('DOMContentLoaded', async function () {
             } catch (err) {
                 formError.textContent = err.message && err.message !== 'Failed to fetch'
                     ? err.message
-                    : 'Something went wrong. Please try again or email me directly.';
+                    : (window.i18n ? window.i18n.t('contact.error.generic') : 'Something went wrong. Please try again or email me directly.');
                 formError.classList.remove('hidden');
-                submitBtn.textContent = 'Send Message';
+                submitBtn.textContent = window.i18n ? window.i18n.t('contact.submit') : 'Send Message';
                 // Reset Turnstile so user can get a fresh token
                 if (window.turnstile && turnstileWidgetId !== null) {
                     window.turnstile.reset(turnstileWidgetId);
