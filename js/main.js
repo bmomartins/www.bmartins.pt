@@ -15,11 +15,6 @@ document.addEventListener('DOMContentLoaded', async function () {
     const headerContent = await headerResponse.text();
     document.getElementById('header-container').innerHTML = headerContent;
 
-    // Load footer
-    const footerResponse = await fetch('/components/footer.html');
-    const footerContent = await footerResponse.text();
-    document.getElementById('footer-container').innerHTML = footerContent;
-
     // Mark active nav link
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.main-nav-link').forEach(function (link) {
@@ -72,11 +67,12 @@ document.addEventListener('DOMContentLoaded', async function () {
                 if (data.turnstileSiteKey) {
                     turnstileSiteKey = data.turnstileSiteKey;
                     renderTurnstileWidget();
+                } else {
+                    submitBtn.disabled = false;
                 }
             })
             .catch(function () {
-                formError.textContent = 'Could not load CAPTCHA. Please refresh the page.';
-                formError.classList.remove('hidden');
+                submitBtn.disabled = false;
             });
 
         contactForm.addEventListener('submit', async function (e) {
