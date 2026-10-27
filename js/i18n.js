@@ -15,7 +15,7 @@
             'home.content': 'Content & Contact',
 
             // About — intro & journey
-            'about.intro': "Hi! I'm Bruno Martins, born in 1989 in Portugal. I work across enterprise infrastructure, cloud, identity, and messaging, with a strong focus on Microsoft 365, Active Directory, Entra ID, SCIM, SAML, Exchange, and Nutanix. Outside of tech, I'm a former chess player with a love for economics and left-wing politics.",
+            'about.intro': "Hi! I'm Bruno Martins, born in 1989 in Portugal. I work across enterprise infrastructure, cloud, identity, and messaging. Microsoft technologies are my specialty, including Microsoft 365, Azure, Active Directory, Entra ID, Exchange, and Azure Arc. Outside of tech, I'm a former chess player with a love for economics and left-wing politics.",
             'about.journey.title': 'Professional Journey',
             'about.journey.subtitle': 'My IT career began in 2008, spanning 17+ years across helpdesk, infrastructure, consultancy, and system administration:',
 
@@ -85,6 +85,15 @@
             'about.interests.economics': '📊 Economics',
             'about.interests.learning': '📚 Learning Technologies',
             'about.interests.oss': '🐧 Open Source',
+            'about.interests.sporting': '🟢 Sporting CP fan',
+            'about.interests.coffee': '☕ Coffee addict',
+            'about.interests.smoking': '🚬 Unfortunately, a smoker',
+            'about.interests.memes': '🤓 Tech memes',
+            'about.softskills.title': 'Soft Skills',
+            'about.softskills.learning': 'Always learning',
+            'about.softskills.proactive': 'Proactive',
+            'about.softskills.team': 'Team worker',
+            'about.softskills.sharing': 'Knowledge sharing',
             'about.values.title': 'Values',
             'about.values.learning': 'Continuous Learning',
             'about.values.sharing': 'Knowledge Sharing',
@@ -131,7 +140,7 @@
             'home.content': 'Conteúdo e Contacto',
 
             // About — intro & journey
-            'about.intro': 'Olá! Sou Bruno Martins, nascido em 1989 em Portugal. Trabalho em infraestrutura empresarial, cloud, identidade e messaging, com foco especial em Microsoft 365, Active Directory, Entra ID, SCIM, SAML, Exchange e Nutanix. Fora do mundo tech, sou ex-jogador de xadrez com paixão por economia e política de esquerda.',
+            'about.intro': 'Olá! Sou Bruno Martins, nascido em 1989 em Portugal. Trabalho em infraestrutura empresarial, cloud, identidade e messaging. As tecnologias Microsoft são a minha especialidade, incluindo Microsoft 365, Azure, Active Directory, Entra ID, Exchange e Azure Arc. Fora do mundo tech, sou ex-jogador de xadrez com paixão por economia e política de esquerda.',
             'about.journey.title': 'Percurso Profissional',
             'about.journey.subtitle': 'A minha carreira em IT começou em 2008, abrangendo mais de 17 anos em helpdesk, infraestrutura, consultoria e administração de sistemas:',
 
@@ -201,6 +210,15 @@
             'about.interests.economics': '📊 Economia',
             'about.interests.learning': '📚 Aprendizagem de Tecnologias',
             'about.interests.oss': '🐧 Open Source',
+            'about.interests.sporting': '🟢 Adepto do Sporting CP',
+            'about.interests.coffee': '☕ Viciado em café',
+            'about.interests.smoking': '🚬 Infelizmente, fumador',
+            'about.interests.memes': '🤓 Memes de tecnologia',
+            'about.softskills.title': 'Competências Interpessoais',
+            'about.softskills.learning': 'Sempre a aprender',
+            'about.softskills.proactive': 'Proativo',
+            'about.softskills.team': 'Espírito de equipa',
+            'about.softskills.sharing': 'Partilha de conhecimento',
             'about.values.title': 'Valores',
             'about.values.learning': 'Aprendizagem Contínua',
             'about.values.sharing': 'Partilha de Conhecimento',
