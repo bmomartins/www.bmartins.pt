@@ -28,9 +28,9 @@
 
             'about.job2.title': 'IT Consultancy',
             'about.job2.subtitle': 'Microsoft technology projects and deployments',
-            'about.job2.bullet1': 'Delivered end-to-end Microsoft technology projects for customers in Portugal, including SPMS, TIMWE, CUF Química, and IPDJ',
-            'about.job2.bullet2': 'Migrated 140k mailboxes to the cloud for SPMS',
-            'about.job2.bullet3': 'Implemented identity security initiatives for TIMWE',
+            'about.job2.bullet1': 'Delivered end-to-end Microsoft technology projects for customers in Portugal, including a national health services provider, a telecom company, CUF Química, and IPDJ',
+            'about.job2.bullet2': 'Migrated 140k mailboxes to the cloud for a national health services provider',
+            'about.job2.bullet3': 'Implemented identity security initiatives for a telecom company',
             'about.job2.bullet4': 'Led AD FS to Entra ID modernization for CUF Química',
             'about.job2.bullet5': 'Delivered Active Directory consolidation and on-premises to Azure domain controller migration for IPDJ',
             'about.job2.bullet6': 'Migrated customer telephony from Alcatel PBX to Microsoft Teams with SBC',
@@ -45,7 +45,7 @@
             'about.job3.bullet5': 'Configured Brocade SAN switches and Cisco switches',
             'about.job3.bullet6': 'Worked with NetApp SAN storage and SMB/S3 protocols',
             'about.job3.bullet7': 'Worked with Nagios, Checkmk, Zabbix, and SCOM; some Azure Monitor experience',
-            'about.job3.bullet8': 'Worked with Veeam (version 10 onward), NetBackup, Veleiro, SCDPM, and Azure Backup',
+            'about.job3.bullet8': 'Worked with Veeam (version 10 onward), NetBackup, Velero, SCDPM, and Azure Backup',
 
             'about.job4.title': 'Early Career — Helpdesk & Training',
             'about.job4.subtitle': 'IT Support & Virtualization · Since 2008',
@@ -54,6 +54,8 @@
             'about.job4.bullet3': 'Administered Active Directory, Exchange Server 2003 through current releases, Exchange Online, Zimbra, iRedMail, and ISA Server',
 
             // About — skills
+            'about.beyond.title': 'Beyond Work',
+            'about.beyond.text': 'I have a real passion for metal music, I occasionally play football, and I love having fun with friends. I also like cybersecurity a lot. Lately I use a lot of AI from Microsoft and Anthropic, including for managing git repositories and building my home lab with Docker. I have basic knowledge of Kubernetes.',
             'about.skills.title': 'Technical Skills',
             'about.skills.cloud': 'Cloud & Identity',
             'about.skills.endpoint': 'Endpoint Management & Infrastructure',
@@ -153,9 +155,9 @@
 
             'about.job2.title': 'Consultoria de IT',
             'about.job2.subtitle': 'Projetos e implementações de tecnologia Microsoft',
-            'about.job2.bullet1': 'Entrega de projetos Microsoft de ponta a ponta para clientes em Portugal, incluindo SPMS, TIMWE, CUF Química e IPDJ',
-            'about.job2.bullet2': 'Migração de 140 mil caixas de correio para a cloud para a SPMS',
-            'about.job2.bullet3': 'Implementação de iniciativas de segurança de identidade para a TIMWE',
+            'about.job2.bullet1': 'Entrega de projetos Microsoft de ponta a ponta para clientes em Portugal, incluindo um prestador nacional de serviços de saúde, uma empresa de telecomunicações, a CUF Química e o IPDJ',
+            'about.job2.bullet2': 'Migração de 140 mil caixas de correio para a cloud para um prestador nacional de serviços de saúde',
+            'about.job2.bullet3': 'Implementação de iniciativas de segurança de identidade para uma empresa de telecomunicações',
             'about.job2.bullet4': 'Liderou a modernização de AD FS para Entra ID na CUF Química',
             'about.job2.bullet5': 'Entrega de consolidação de Active Directory e migração de controladores de domínio on-premises para Azure para o IPDJ',
             'about.job2.bullet6': 'Migração de telefonia de cliente de Alcatel PBX para Microsoft Teams com SBC',
@@ -170,7 +172,7 @@
             'about.job3.bullet5': 'Configuração de switches SAN Brocade e switches Cisco',
             'about.job3.bullet6': 'Trabalho com armazenamento NetApp SAN e protocolos SMB/S3',
             'about.job3.bullet7': 'Experiência com Nagios, Checkmk, Zabbix e SCOM; alguma experiência com Azure Monitor',
-            'about.job3.bullet8': 'Trabalho com Veeam (a partir da versão 10), NetBackup, Veleiro, SCDPM e Azure Backup',
+            'about.job3.bullet8': 'Trabalho com Veeam (a partir da versão 10), NetBackup, Velero, SCDPM e Azure Backup',
 
             'about.job4.title': 'Início de Carreira — Helpdesk e Formação',
             'about.job4.subtitle': 'Suporte de IT e Virtualização · Desde 2008',
@@ -179,6 +181,8 @@
             'about.job4.bullet3': 'Administração de Active Directory, Exchange Server 2003 até às versões atuais, Exchange Online, Zimbra, iRedMail e ISA Server',
 
             // About — skills
+            'about.beyond.title': 'Para Além do Trabalho',
+            'about.beyond.text': 'Tenho uma grande paixão por música metal, jogo futebol ocasionalmente e adoro divertir-me com amigos. Gosto muito de cibersegurança. Ultimamente uso muita IA da Microsoft e da Anthropic, incluindo para gerir repositórios git e construir o meu home lab com Docker. Tenho conhecimentos básicos de Kubernetes.',
             'about.skills.title': 'Competências Técnicas',
             'about.skills.cloud': 'Cloud e Identidade',
             'about.skills.endpoint': 'Gestão de Endpoints e Infraestrutura',
